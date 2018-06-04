@@ -1,6 +1,6 @@
 package uk.co.cardchallenge.model;
 
-public enum Suite {
+public enum Suit {
 
     HEART,
     DIAMOND,
