@@ -22,11 +22,6 @@ public class Deck {
         shuffleDeck();
         System.out.println(deckContainer.size());
         System.out.println(drawCard());
-        System.out.println(drawCard());
-        System.out.println(drawCard());
-        System.out.println(drawCard());
-        System.out.println(drawCard());
-        System.out.println(drawCard());
         System.out.println(deckContainer.size());
     }
 
@@ -39,6 +34,14 @@ public class Deck {
         Card chosen = deckContainer.get(r.nextInt(defaultCard.size()));
         deckContainer.remove(chosen);
         return chosen;
+    }
+
+    private List<Card> drawMultiple(int no) {
+        List<Card> container = new LinkedList<>();
+        for(int i = 0; i < no; i++) {
+            container.add(drawCard());
+        }
+        return container;
     }
 
     public int cardsLeft() {
