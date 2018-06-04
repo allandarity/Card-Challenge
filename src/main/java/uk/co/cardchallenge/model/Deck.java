@@ -20,9 +20,6 @@ public class Deck {
             });
         });
         shuffleDeck();
-        System.out.println(deckContainer.size());
-        System.out.println(drawCard());
-        System.out.println(deckContainer.size());
     }
 
     public void shuffleDeck() {
@@ -41,10 +38,20 @@ public class Deck {
 
     public List<Card> drawMultiple(int no) {
         List<Card> container = new LinkedList<>();
-        for(int i = 0; i < no; i++) {
-            container.add(drawCard());
+        if(no > cardsLeft()) {
+            for (int i = 0; i < cardsLeft(); i++) {
+                container.add(drawCard());
+            }
+        } else {
+            for (int i = 0; i < no; i++) {
+                container.add(drawCard());
+            }
         }
         return container;
+    }
+
+    public boolean deckContains(Card card) {
+        return deckContainer.contains(card);
     }
 
     public Card getHeadCard() {

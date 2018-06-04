@@ -1,6 +1,5 @@
 package uk.co.cardchallenge;
 
-import uk.co.cardchallenge.model.Deck;
 import uk.co.cardchallenge.ui.MainFrame;
 
 public class Worker {

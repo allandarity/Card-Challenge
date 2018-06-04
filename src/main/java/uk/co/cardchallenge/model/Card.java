@@ -15,7 +15,6 @@ public class Card {
 
     public String getImagePath() { return imagePath; }
 
-
     @Override
     public String toString() {
         return "Card{" +
