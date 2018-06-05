@@ -32,29 +32,14 @@ public class MainFrame extends JDialog {
         getRootPane().setDefaultButton(buttonOK);
         icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("Q.jpg")));
         imageLabel.setIcon(icon);
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
 
-        drawMultipleButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                drawMultiple();
-            }
-        });
+        buttonOK.addActionListener(e -> onOK());
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+        drawMultipleButton.addActionListener(e -> drawMultiple());
 
-        newButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                newDeck();
-            }
-        });
+        buttonCancel.addActionListener(e -> onCancel());
+
+        newButton.addActionListener(e -> newDeck());
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -75,7 +60,7 @@ public class MainFrame extends JDialog {
         this.setVisible(true);
     }
 
-    public void addText(List<String> text) {
+    private void addText(List<String> text) {
         text.forEach(s -> textArea1.append(s + "\n"));
     }
 
@@ -97,22 +82,28 @@ public class MainFrame extends JDialog {
     private void drawMultiple() {
         try {
             int no = Integer.valueOf(JOptionPane.showInputDialog(this, "Enter Number of Cards"));
-            if (deck.cardsLeft() > 0) {
-                List<Card> list = deck.drawMultiple(no);
-                list.forEach(card -> {
-                    addText(Collections.singletonList(card.toString() + " is drawn"));
-                });
-                setImage(list.get(list.size() - 1));
-                addText(Collections.singletonList(deck.cardsLeft() + " remain"));
+            if(no < deck.cardsLeft()) {
+                if (deck.cardsLeft() > 0) {
+                    List<Card> list = deck.drawMultiple(no);
+                    System.out.println(no);
+                    System.out.println(list.size());
+                    list.forEach(card -> {
+                        addText(Collections.singletonList(card.toString() + " is drawn"));
+                    });
+                    setImage(list.get(list.size() - 1));
+                    addText(Collections.singletonList(deck.cardsLeft() + " remain"));
+                } else {
+                    addText(Collections.singletonList("There are no cards left"));
+                }
             } else {
-                addText(Collections.singletonList("There are no cards left"));
+                JOptionPane.showMessageDialog(this, "TOO MANY");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "MUST BE A NUMBER");
         }
     }
 
-    public void setImage(Card card) {
+    private void setImage(Card card) {
         try {
             imageLabel.setIcon(new ImageIcon(
                     new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().
