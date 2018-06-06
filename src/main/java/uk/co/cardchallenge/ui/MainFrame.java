@@ -82,7 +82,7 @@ public class MainFrame extends JDialog {
     private void drawMultiple() {
         try {
             int no = Integer.valueOf(JOptionPane.showInputDialog(this, "Enter Number of Cards"));
-            if(no < deck.cardsLeft()) {
+            if(no <= deck.cardsLeft()) {
                 if (deck.cardsLeft() > 0) {
                     List<Card> list = deck.drawMultiple(no);
                     System.out.println(no);
