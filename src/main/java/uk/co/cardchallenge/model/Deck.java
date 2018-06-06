@@ -38,7 +38,7 @@ public class Deck {
 
     public List<Card> drawMultiple(int no) {
         List<Card> container = new LinkedList<>();
-        if(no < cardsLeft()) {
+        if(no <= cardsLeft()) {
             System.out.println(cardsLeft());
             for (int i = 0; i < no; i++) {
                 System.out.println(i);

@@ -59,18 +59,30 @@ public class DeckTest {
         int deckSizeBefore = deck.cardsLeft();
         List<Card> container = deck.drawMultiple(10);
         int deckSizeAfter = deck.cardsLeft();
-        container.forEach(card -> deck.drawCard());
-        Assert.assertTrue(deckSizeBefore > deckSizeAfter );
+        Assert.assertTrue((deckSizeBefore - 10) == deckSizeAfter);
     }
 
     @Test
-    public void drawMultipleOverTheLimit() {
+    public void drawMultipleJustOverTheLimit() {
         int deckSizeBefore = deck.cardsLeft();
-        List<Card> container = deck.drawMultiple(70);
+        List<Card> container = deck.drawMultiple(53);
+        int deckSizeAfter = deck.cardsLeft();
         System.out.println(deckSizeBefore);
-        System.out.println(container.size());
+        System.out.println(deckSizeAfter);
+        Assert.assertTrue(deckSizeBefore == deckSizeAfter);
     }
 
+    @Test
+    public void drawMultipleOnTheLimit() {
+        int deckSizeBefore = deck.cardsLeft();
+        List<Card> container = deck.drawMultiple(52);
+        int deckSizeAfter = deck.cardsLeft();
+        System.out.println(deckSizeBefore);
+        System.out.println(deckSizeAfter);
+        Assert.assertTrue(deckSizeAfter == 0);
+        Assert.assertTrue(container.size() == 52);
+    }
+    
     @Test
     public void getHeadCard() {
         Card card = deck.getHeadCard();
@@ -88,5 +100,8 @@ public class DeckTest {
         } catch (Exception e) {
             Assert.fail("Deck was never filled out");
         }
+        int deckSizeAfter = deck.cardsLeft();
+        System.out.println(deckSizeAfter);
+        Assert.assertTrue(deckSizeAfter == 52);
     }
 }
